@@ -1,3 +1,8 @@
 # Scapegoat Tree
-## Progetto di Algoritmi anno 2020/2021
-Implementazione della struttura e relativa documentazione realizzata in Latex 
+#### Progetto di Algoritmi anno 2020/2021
+La repository contiene:
+- Il codice sorgente dell'implementazione della struttura dati (Scapegoat-Tree.cpp)
+- La documentazione relativa agli aspetti teorici e pratici del progetto visionabile in:
+-- Formato pdf (Scapelgoat tree documentation.pdf)
+-- Formato sorgente (Scapelgoat tree documentation.zip)
+
