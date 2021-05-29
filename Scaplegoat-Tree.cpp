@@ -426,8 +426,7 @@ int main()
 	sgt->insertKey(5);
 	sgt->insertKey(8);
 	sgt->insertKey(8.5);
-	printf("Preorder traversal of the"
-		   " constructed ScapeGoat tree is \n");
+	cout<<"La visita preorder dello ScapeGoat tree risulta: ";
 	sgt->_preorder();
 	cout << endl;
 	cout << "Ricerca della chiave 8.5: " << sgt->_searchKey(8.5) << endl;
