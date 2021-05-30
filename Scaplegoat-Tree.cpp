@@ -10,9 +10,8 @@ static float const log32(int n)
 	return (float)(log23 * log(n));
 }
 
-//Classe che definisce un Nodo dello Scapegoat-tree
-template <class T>
-class Nodo
+/** Classe che definisce un Nodo dello Scapegoat-tree */
+template <class T> class Nodo
 {
 private:
 	T *key;
@@ -67,9 +66,8 @@ public:
 	}
 };
 
-//Classe astratta Tree, per la definizione di un qualsiasi albero binario
-template <class T>
-class Tree
+/**Classe astratta Tree, per la definizione di un generico albero binario */
+template <class T> class Tree
 {
 public:
 	virtual void preorder(Nodo<T> *){};
@@ -81,9 +79,8 @@ public:
 	virtual Nodo<T> *searchKey(T x) = 0;
 };
 
-// Classe per rappresentare lo Scaplegoat-tree
-template <class T>
-class SGTree : public Tree<T>
+/** Classe per rappresentare lo Scaplegoat-tree */
+template <class T> class SGTree : public Tree<T>
 {
 private:
 	Nodo<T> *root;
@@ -128,7 +125,7 @@ private:
 		return ((a) - (double)(b));
 	}
 
-	//Funzione che dopo una visita inorderd salva i nodi all'interno di un array
+	//Funzione che dopo una visita inorder salva i nodi all'interno di un array
 	int storeInArray(Nodo<T> *node, Nodo<T> *array[], int i)
 	{
 		if (node == NULL)
@@ -146,7 +143,7 @@ public:
 		nodeNumber = 0;
 	}
 
-	// visita preorder dell'albero
+	// Chiamata alla funzione privata per effettuare la visita preorder dell'albero
 	void _preorder()
 	{
 		preorder(root);
@@ -160,7 +157,7 @@ public:
 		return 1 + getSize(node->getLeft()) + getSize(node->getRight());
 	}
 
-	//<-- METODI PER L'INSERIMENTO -->
+	// <-- METODI PER L'INSERIMENTO -->
 
 	// Per inserire nuovi elementi all'interno dell'albero
 	bool insertKey(T key)
@@ -175,7 +172,7 @@ public:
 		if (depth > log32(MaxNode))
 		{
 			// cerco lo scaplegoat-node
-			Nodo<T> *p = newNode->getParent();
+			Nodo<T> *p = newNode;
 			while (3 * getSize(p) <= 2 * getSize(p->getParent()))
 				p = p->getParent();
 
@@ -285,6 +282,7 @@ public:
 	}
 
 	//<-- METODI PER LA RICERCA -->
+
 	// Metodo che cerca una determinata chiave e restituisce il nodo se esiste oppure l'iltimo nodo appartenente al percorso
 	Nodo<T> *searchKey(T key)
 	{
@@ -307,6 +305,7 @@ public:
 	}
 
 	//<-- METODI PER LA CANCELLAZIONE -->
+
 	Nodo<T> *minimum(Nodo<T> *node)
 	{
 		if (node == NULL)
@@ -399,7 +398,7 @@ public:
 		deleteKey(successive->getKey());
 		node->setKey(successive->getKey());
 
-		//	qui avviene in controllo
+		//	qui avviene in controllo per verificare se soddisfa ancora i requisiti di uno scapegoat
 		nodeNumber--;
 		if (nodeNumber < MaxNode / 2)
 		{
@@ -425,8 +424,9 @@ int main()
 	sgt->insertKey(9);
 	sgt->insertKey(5);
 	sgt->insertKey(8);
+	//Sino a questo inserimento l'albero non viene ricostruito
 	sgt->insertKey(8.5);
-	cout << "La visita preorder dello ScapeGoat tree risulta";
+	cout << "La visita preorder dello ScapeGoat tree risulta: ";
 	sgt->_preorder();
 	cout << endl;
 	cout << "Ricerca della chiave 8.5: " << sgt->_searchKey(8.5) << endl;
